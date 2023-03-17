@@ -15,6 +15,9 @@ function Products () {
     const [visible,setVisible]=useState(false)
     const [visible2,setVisible2]=useState(false)
     // const [currentUser] = useOutletContext();
+
+    const loading = useSelector((state) => state.products.loading);
+
     useEffect(() => {
       // getProducts()
       // .then((res)=>{setProducts(res.data);console.log(res)})
@@ -47,8 +50,22 @@ function Products () {
     }, [])
     
     
-        return ( 
+        return ( <>
+        <div>
+      <h2>Products</h2>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {products.map((product) => (
+            <li key={product.id}>{product.title}</li>
+          ))}
+        </ul>
+      )}
+        </div>
+        
             <Container>
+              
             <Row>
             {/* {currentUser} */}
            {visible2 &&  <Alert variant="success">
@@ -71,7 +88,7 @@ function Products () {
             </p>
              </Alert>}
         </Row>
-        </Container> );
+        </Container></> );
     
 }
  
